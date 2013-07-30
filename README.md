@@ -1,6 +1,6 @@
 Simple Form Builder
 ---------
-demo: <chunpu.github.io/formBuilder>
+demo: <http://chunpu.github.io/formBuilder>
 
 Support Types
 ----------
