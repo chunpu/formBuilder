@@ -2,6 +2,9 @@ Simple Form Builder
 ---------
 demo: <http://chunpu.github.io/formBuilder>
 
+Install
+-----
+
 Support Types
 ----------
 
