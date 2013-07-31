@@ -4,7 +4,7 @@ module.exports = function(grunt) {
       all: ['test/*.html']
     }
   });
-  
-  grunt.loadNpmTasks('grunt-contrib-qunit');
+
+  grunt.loadNpmTasks('grunt-contrib-qunit'); 
   grunt.registerTask('default', 'qunit');
 }

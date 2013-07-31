@@ -37,7 +37,7 @@
       }
     }
     html += '</div>';
-    html += '<fieldset>';
+    html += '</fieldset>';
     return html;
   }
 
