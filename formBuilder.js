@@ -2,7 +2,8 @@
 
   // export only render
   var formBuilder = {
-    render: genSectionView
+    render: genSectionView,
+    isSection: isSection
   };
   if (window) {
     window.formBuilder = formBuilder;
@@ -25,7 +26,6 @@
     var html = '';
     level = level || 1;
     var attrs = section.content;
-    console.log(section);
     html += '<fieldset>';
     html += '<legend class="bold section-h' + level + '">' + section.section + '</legend>';
     html += '<div class="section-content">';
@@ -44,6 +44,16 @@
   function qsStringify(o, label) {
     label = label || 'input';
     var html = '<' + label;
+
+    // add class theme, maybe var later
+    if ('class' in o) {
+      o['class'] += ' form-control';
+    } else {
+      o['class'] = 'form-control';
+    }
+
+    // delete the attr not belog to tag, like options
+
     for (var key in o) {
       if (o[key]) {
 
@@ -100,6 +110,7 @@
 
         // input type
         o.type = o.type || 'text';
+        /*
         var _o = {
           'type': o.type,
           'class': 'form-control',
@@ -111,9 +122,10 @@
           _o.max = o.max;
           _o.min = o.min;
         }
-        html += qsStringify(_o);
+        */
+        html += qsStringify(o);
       }
-      html += '<label>';
+      html += '</label>';
 
     } else if (['radio', 'checkbox'].indexOf(o.type) != -1) {
       

@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="./libs/qunit-theme-ninja.css">
+  <script src="./libs/qunit.js"></script>
+  <script src="../formBuilder.js"></script>
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <div id="preview"></div>
+  <script>
+    var view = document.getElementById('preview');
+    var _index = 0;
+    var _div = [];
+    function createEle() {
+      _index ++;
+      _div[_index] = document.createElement('div');
+      _div[_index].id = "test-div-" + _index;
+      view.appendChild(_div[_index]);
+      return _div[_index];
+    }
+  </script>
+  <script src="test.returnString.js"></script>
+  <script src="test.isSection.js"></script>
+  <script src="test.attr.js"></script>
+</body>
+</html>
