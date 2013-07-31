@@ -3,7 +3,8 @@
   // export only render
   var formBuilder = {
     render: genSectionView,
-    isSection: isSection
+    isSection: isSection,
+    qsStringify: qsStringify
   };
   if (window) {
     window.formBuilder = formBuilder;
@@ -41,11 +42,16 @@
     return html;
   }
 
-  function qsStringify(o, label) {
-    label = label || 'input';
-    var html = '<' + label;
-
+  function qsStringify(o, opt) {
     // add class theme, maybe var later
+    var html = '';
+    opt = opt || {};
+    opt.ignore = opt.ignore || [];
+    if (opt && opt.label) {
+      opt.label = opt.label || 'input';
+      html += '<' + opt.label + '';
+    }
+
     if ('class' in o) {
       o['class'] += ' form-control';
     } else {
@@ -55,8 +61,11 @@
     // delete the attr not belog to tag, like options
 
     for (var key in o) {
+      if (opt.ignore.indexOf(key) != -1) {
+        // should be ignore
+        continue;
+      }
       if (o[key]) {
-
         if (['selected', 'checked', 'disable', 'readonly'].indexOf(key) != -1) {
 
           // o[key] should be true!
@@ -69,7 +78,10 @@
         }
       }
     }
-    html += ' />';
+
+    if (opt && opt.label) {
+      html += ' />';
+    }
     return html;
   }
 
@@ -79,7 +91,7 @@
       if (type == 'string' || type == 'number') {
         var _o = {
           value: options[i],
-          name: options[i]
+          //name: options[i]
         }
         options[i] = _o;
       }
@@ -98,10 +110,15 @@
       if (o.type == 'select') {
 
         // select type, it has options
-        html += '<select class="form-control">';
+        // html += '<select class="form-control">';
+        html += '<select ' + qsStringify(o) + ' >';
+        o.options = formatOptions(o.options);
+        console.log(o.options);
         if (Array.isArray(o.options) && o.options.length > 0) {
           for (var i = 0; i < o.options.length; i++) {
-            html += '<option>' + o.options[i]  + '</option>';
+            // html += '<option>' + o.options[i]  + '</option>';
+            var content = o.options[i].name || o.options[i].value;
+            html += qsStringify(o.options[i], {label: 'option',content: content});
           }
         }
         html += '</select>';
@@ -123,7 +140,7 @@
           _o.min = o.min;
         }
         */
-        html += qsStringify(o);
+        html += qsStringify(o, {label: 'input'});
       }
       html += '</label>';
 
@@ -140,7 +157,7 @@
             'name': o.name,
             'checked': o.value == o.options[i].value ? true : false,
             'value': o.options[i].value
-          });
+          }, {label: 'input'});
           html += ' ' + o.options[i].name;
           html += '</label>';
         }
