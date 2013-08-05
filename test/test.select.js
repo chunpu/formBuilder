@@ -1,6 +1,6 @@
 module('select');
 
-test('test the <select> element', function() {
+test('test the <select> element without init value', function() {
 
   var ele = createEle();
   var section = {
@@ -40,6 +40,7 @@ test('test the <select> element with init value', function() {
   };
   ele.innerHTML = formBuilder.render(section);
   var select = document.getElementById(ele.id + '-select');
+  ok(select.getAttribute('value') == undefined);
   ok(select.value == 3);
 
-})
+});

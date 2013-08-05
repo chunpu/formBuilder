@@ -9,7 +9,7 @@ function qsParse(str) {
   for (var i = 0; i < arr.length; i++) {
     var _arr = arr[i].split('=');
     var k = _arr[0];
-    var v = _arr[1].substring(1, _arr[1].length-1);
+    var v = _arr[1].substring(0, _arr[1].length);
     obj[k] = v;
   }
   return obj;
@@ -27,14 +27,14 @@ test('{name: "name", value: "val"}', function() {
 
 test("", function() {
 
-  // we don't need name for select option
   var obj = {
     name: "name1",
     value: "value1"
   };
-  var str = formBuilder.qsStringify(obj, ['name']);
+  var str = formBuilder.qsStringify(obj);
   var obj1 = {
     value: "value1",
+    name: "name1",
     "class": "form-control"
   };
   deepEqual(qsParse(str), obj1);

@@ -21,6 +21,7 @@ test('attr should become html label attr', function() {
   }
   ele.innerHTML = formBuilder.render(section);
   var name = document.getElementById(ele.id + '-name');
+  console.log(ele.id, name);
   ok(name instanceof HTMLElement);
   ok(name.value == 'myname');
   ok(name.name == 'name');

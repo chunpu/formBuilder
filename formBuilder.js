@@ -44,7 +44,25 @@
 
   function qsStringify(o, opt) {
     // add class theme, maybe var later
-    var html = '';
+    var skey = ['checked', 'selected', 'disable', 'readonly'];
+    var str = '';
+    if (o.class) {
+      o.class += ' form-control';
+    } else {
+      o.class = 'form-control';
+    }
+    
+    for (var key in o) {
+      if (o[key]) {
+        if (skey.indexOf(key) != -1) {
+          str += key + ' ';
+        } else {
+          str += key + '=' + o[key] + ' ';
+        }
+      }
+    }
+    return str;
+    /*
     opt = opt || {};
     opt.ignore = opt.ignore || [];
     if (opt && opt.label) {
@@ -82,7 +100,7 @@
     if (opt && opt.label) {
       html += ' />';
     }
-    return html;
+    */
   }
 
   function formatOptions(options) {
@@ -111,6 +129,10 @@
 
         // select type, it has options
         // html += '<select class="form-control">';
+        if (o.value) {
+          var value = o.value;
+          delete(o.value);
+        }
         html += '<select ' + qsStringify(o) + ' >';
         o.options = formatOptions(o.options);
         console.log(o.options);
@@ -118,7 +140,11 @@
           for (var i = 0; i < o.options.length; i++) {
             // html += '<option>' + o.options[i]  + '</option>';
             var content = o.options[i].name || o.options[i].value;
-            html += qsStringify(o.options[i], {label: 'option',content: content});
+            //html += qsStringify(o.options[i], {label: 'option',content: content});
+            if (o.options[i].value == value) {
+              o.options[i].selected = true;
+            }
+            html += '<option ' + qsStringify(o.options[i]) + '>' + content + '</options>';
           }
         }
         html += '</select>';
@@ -127,7 +153,6 @@
 
         // input type
         o.type = o.type || 'text';
-        /*
         var _o = {
           'type': o.type,
           'class': 'form-control',
@@ -139,8 +164,7 @@
           _o.max = o.max;
           _o.min = o.min;
         }
-        */
-        html += qsStringify(o, {label: 'input'});
+        html += '<input ' + qsStringify(o) + '></input>';
       }
       html += '</label>';
 
@@ -152,13 +176,16 @@
         o.options = formatOptions(o.options);
         for (var i = 0; i < o.options.length; i++) {
           html += '<label class="' + o.type + '-inline">';
+          html += '<input ';
           html += qsStringify({
             'type': o.type,
             'name': o.name,
             'checked': o.value == o.options[i].value ? true : false,
-            'value': o.options[i].value
-          }, {label: 'input'});
-          html += ' ' + o.options[i].name;
+            'value': o.options[i].value,
+            'id': o.id
+          });
+          var text = o.options[i].text || o.options[i].value;
+          html += '>' + text + '</input>';
           html += '</label>';
         }
       }
