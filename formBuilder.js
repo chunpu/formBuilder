@@ -202,6 +202,7 @@
           html += '</label>';
         }
       }
+
     } else if (o.type == 'list') {
 
       // list type
@@ -213,6 +214,7 @@
       }
       html += '<br><br><input id="new' + o.name + '" type="text" />';
       html += '<button name="' + o.name + '" method="push">添加</button>';
+
     } else if (o.type == 'boolean') {
 
       // boolean type ==> radio
@@ -229,7 +231,7 @@
           name: o.name,
           value: bl.toString() // false will be ignore
         }
-        html += '<input ' + qsStringify(_o) + '>' + textHash[bl] + '</input>';
+        html += '<label class="radio-inline"><input ' + qsStringify(_o) + '>' + textHash[bl] + '</label>';
       });
       // html += '<input type="radio" name="' + o.name + '" value="true">Yes</input>';
       // html += '<input type="radio" name="' + o.name + '" value="false">No</input>';
