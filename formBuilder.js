@@ -124,7 +124,7 @@
     o.label = o.label || o.name;
     html += '<div class="attr">';
     // type
-    if ([undefined, 'input', 'select', 'range'].indexOf(o.type) != -1) {
+    if ([undefined, 'text', 'select', 'range'].indexOf(o.type) != -1) {
       html += '<label class="full-width">';
       html += '<span class="attr-name">' + o.label + '</span>';
       if (o.type == 'select') {
