@@ -209,7 +209,8 @@
           html += '<br><input name="' + o.name + '.' + i + '" value="' + o.value[i] + '"/><button name="' + o.name + '.' + i + '" method="delete">删除</button>';
         }
       }
-      html += '<br><button name="' + o.name + '" method="push">添加</button>';
+      html += '<br><br><input id="new' + o.name + '" type="text" />';
+      html += '<button name="' + o.name + '" method="push">添加</button>';
     }
     html += '</div>';
     return html;
