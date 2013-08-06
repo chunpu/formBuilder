@@ -203,6 +203,8 @@
         }
       }
     } else if (o.type == 'list') {
+
+      // list type
       html += '<span class="attr-name">' + o.name + '</span>';
       if (o.value && o.value.length > 0) {
         for (var i = 0; i < o.value.length; i++) {
@@ -211,7 +213,28 @@
       }
       html += '<br><br><input id="new' + o.name + '" type="text" />';
       html += '<button name="' + o.name + '" method="push">添加</button>';
+    } else if (o.type == 'boolean') {
+
+      // boolean type ==> radio
+      html += '<span class="attr-name">' + o.name + '</span>';
+      var textHash = {
+        true: 'Yes',
+        false: 'No'
+      };
+      [true, false].forEach(function(bl) {
+        var checked = (bl == o.value ? true : false);
+        var _o = {
+          type: 'radio',
+          checked: checked,
+          name: o.name,
+          value: bl.toString() // false will be ignore
+        }
+        html += '<input ' + qsStringify(_o) + '>' + textHash[bl] + '</input>';
+      });
+      // html += '<input type="radio" name="' + o.name + '" value="true">Yes</input>';
+      // html += '<input type="radio" name="' + o.name + '" value="false">No</input>';
     }
+
     html += '</div>';
     return html;
   }
