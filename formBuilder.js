@@ -180,10 +180,19 @@
         for (var i = 0; i < o.options.length; i++) {
           html += '<label class="' + o.type + '-inline">';
           html += '<input ';
+          var checked = false;
+          if (Array.isArray(o.value)) {
+            if (o.value.indexOf(o.options[i].value) != -1) {
+              console.log(2222222);
+              checked = true;
+            }
+          } else if (o.value == o.options[i].value){
+            checked = true;
+          }
           html += qsStringify({
             'type': o.type,
             'name': o.name,
-            'checked': o.value == o.options[i].value ? true : false,
+            'checked': checked,
             'value': o.options[i].value,
             'id': o.id
           });
