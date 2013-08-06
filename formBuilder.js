@@ -204,9 +204,9 @@
       }
     } else if (o.type == 'list') {
       html += '<span class="attr-name">' + o.name + '</span>';
-      if (o.values && o.values.length > 0) {
-        for (var i = 0; i < o.values.length; i++) {
-          html += '<br><input name="' + o.name + '.' + i + '" /><button name="' + o.name + '.' + i + '">删除</button>';
+      if (o.value && o.value.length > 0) {
+        for (var i = 0; i < o.value.length; i++) {
+          html += '<br><input name="' + o.name + '.' + i + '" value="' + o.value[i] + '"/><button name="' + o.name + '.' + i + '" method="delete">删除</button>';
         }
       }
       html += '<br><button name="' + o.name + '" method="push">添加</button>';

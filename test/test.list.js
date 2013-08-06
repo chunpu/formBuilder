@@ -8,7 +8,7 @@ test("test list", function() {
       {
         name: "mylist",
         type: "list",
-        values: [
+        value: [
           1,2,3,4
         ]
       }
