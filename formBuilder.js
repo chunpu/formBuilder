@@ -161,13 +161,14 @@
           'class': 'form-control',
           'name': o.name,
           'placeholder': o.placeholder,
-          'value': o.value
+          'value': o.value,
+          'id': o.id
         };
         if (o.type == 'range') {
           _o.max = o.max;
           _o.min = o.min;
         }
-        html += '<input ' + qsStringify(o) + '></input>';
+        html += '<input ' + qsStringify(_o) + '></input>';
       }
       html += '</label>';
 
@@ -201,6 +202,14 @@
           html += '</label>';
         }
       }
+    } else if (o.type == 'list') {
+      html += '<span class="attr-name">' + o.name + '</span>';
+      if (o.values && o.values.length > 0) {
+        for (var i = 0; i < o.values.length; i++) {
+          html += '<br><input name="' + o.name + '.' + i + '" /><button name="' + o.name + '.' + i + '">删除</button>';
+        }
+      }
+      html += '<br><button name="' + o.name + '" method="push">添加</button>';
     }
     html += '</div>';
     return html;
