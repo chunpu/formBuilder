@@ -21,7 +21,6 @@ test('{name: "name", value: "val"}', function() {
     value: "val"
   };
   var str = formBuilder.qsStringify(obj, {ignore: ['name']});
-  obj['class'] = 'form-control';
   deepEqual(qsParse(str), obj);
 });
 
@@ -35,7 +34,6 @@ test("", function() {
   var obj1 = {
     value: "value1",
     name: "name1",
-    "class": "form-control"
   };
   deepEqual(qsParse(str), obj1);
 });

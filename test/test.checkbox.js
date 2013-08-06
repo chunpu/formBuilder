@@ -18,7 +18,7 @@ test("checkbox without init value", function() {
   ok(checkbox instanceof HTMLElement);
 });
 
-test("checkbox without init value", function() {
+test("checkbox with init value", function() {
   var el = createEle();
   var section = {
     section: "checkbox section",

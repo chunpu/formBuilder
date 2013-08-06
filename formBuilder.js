@@ -46,11 +46,13 @@
     // add class theme, maybe var later
     var skey = ['checked', 'selected', 'disable', 'readonly'];
     var str = '';
+    /*
     if (o.class) {
       o.class += ' form-control';
     } else {
       o.class = 'form-control';
     }
+    */
     
     for (var key in o) {
       if (o[key]) {
@@ -133,6 +135,7 @@
           var value = o.value;
           delete(o.value);
         }
+        o.class = "form-control";
         html += '<select ' + qsStringify(o) + ' >';
         o.options = formatOptions(o.options);
         console.log(o.options);
